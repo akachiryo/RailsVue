@@ -9,6 +9,7 @@ import Vue from 'vue'
 import Vuetify from "vuetify"; // 追加
 import "vuetify/dist/vuetify.min.css"; // 追加
 import router from '@/router'; //追加
+import store from '@/store' //追加
 import App from '../app.vue'
 
 Vue.use(Vuetify); // 追加
@@ -16,6 +17,14 @@ const vuetify = new Vuetify(); // 追加
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
+    store, //追加
+    created() {
+      const userString = localStorage.getItem('currentUser')
+      if (userString) {
+          const userData = JSON.parse(userString)
+          this.$store.commit('auth/SET_CURRENT_USER', userData)
+      }
+  },
     router, //追加
     vuetify, //追加
     render: h => h(App)

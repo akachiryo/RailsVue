@@ -5,20 +5,28 @@
             app
     >
       <v-list dense>
-        <v-list-item link>
+        <v-list-item to="/" link>
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
+            <v-list-item-title>ホーム</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item link v-if="$store.getters['auth/currentUser']">
           <v-list-item-action>
-            <v-icon>mdi-email</v-icon>
+            <v-icon>mdi-account</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Contact</v-list-item-title>
+            <v-list-item-title @click="logout">ログアウト</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item to="/login" link v-else>
+          <v-list-item-action>
+            <v-icon>mdi-account</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>ログイン</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -34,7 +42,7 @@
     </v-app-bar>
 
     <v-main>
-      <v-container
+      <!-- <v-container
               class="fill-height"
               fluid
       >
@@ -42,7 +50,7 @@
                 align="center"
                 justify="center"
         >
-          <v-col class="text-center">
+          <v-col class="text-center"> -->
             <!-- <v-tooltip left>
               <template v-slot:activator="{ on }">
                 <v-btn
@@ -57,10 +65,11 @@
               </template>
               <span>Source</span>
             </v-tooltip> -->
-            <router-view></router-view>
+            <!-- <router-view></router-view>
           </v-col>
         </v-row>
-      </v-container>
+      </v-container> -->
+      <router-view></router-view>
     </v-main>
     <v-footer
             color="indigo"
@@ -78,6 +87,13 @@
     },
     data: () => ({
       drawer: null,
-    })
+    }),
+        methods: {
+      logout() {
+        if (confirm("ログアウトしますか？")) {
+          this.$store.dispatch('auth/logout')
+        }
+      }
+    }
  }
 </script>

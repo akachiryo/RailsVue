@@ -1,13 +1,15 @@
 <template>
-    <div>
-        <v-container>
-            <v-row justify="center" align="center">
-                <v-col
-                        cols="12"
-                        sm="8"
-                        md="4">
-                    <v-card class="elevation-12">
-                        <v-card-text>
+    <v-container
+            class="fill-height"
+            fluid
+    >
+        <v-row justify="center" align="center">
+            <v-col
+                    cols="12"
+                    sm="8"
+                    md="6">
+                <v-card class="elevation-12">
+                    <v-card-text>
 
                             <v-form
                                     ref="form"
@@ -33,7 +35,7 @@
 
                                 <v-text-field
                                         v-model="password"
-                                        :rules="passwordConfirmationRules"
+                                        :rules="passwordRules"
                                         label="Password"
                                         required
                                         prepend-icon="mdi-lock"
@@ -42,6 +44,7 @@
 
                                 <v-text-field
                                         v-model="passwordConfirmation"
+                                        :rules="passwordConfirmationRules"
                                         label="PasswordConfirmation"
                                         required
                                         prepend-icon="mdi-lock"
@@ -52,15 +55,14 @@
                         </v-card-text>
 
                         <v-card-actions>
-                            <v-btn color="primary" @click="signup">新規登録</v-btn>
+                            <router-link to="/login" class="text-decoration-none caption">ログインページへ</router-link>
                             <v-spacer></v-spacer>
-                            <router-link to="/login" class="text-decoration-none">ログインページへ</router-link>
+                            <v-btn dark color="indigo" @click="signup">新規登録</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-col>
             </v-row>
         </v-container>
-    </div>
 </template>
 
 <script>
@@ -86,8 +88,16 @@
                     v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
                 ]
             },
+             passwordRules() {
+                return [
+                    v => !!v || 'Password is required',
+                ]
+            },
             passwordConfirmationRules() {
-                return [this.password === this.passwordConfirmation || 'Password must match']
+                return [
+                    v => !!v || 'PasswordConfirmation is required',
+                    this.password === this.passwordConfirmation || 'Password must match'
+                ]
             }
         },
         methods: {
@@ -102,7 +112,7 @@
                                 password_confirmation: this.passwordConfirmation
                             }
                         })
-                        this.$router.push(`login`)
+                        this.$router.push(`/login`)
                     } catch(err) {
                         alert(err.response.data.error.messages)
                     }
@@ -110,3 +120,4 @@
             }
         },
     }
+    </script>
