@@ -43,7 +43,7 @@
                 justify="center"
         >
           <v-col class="text-center">
-            <v-tooltip left>
+            <!-- <v-tooltip left>
               <template v-slot:activator="{ on }">
                 <v-btn
                         :href="source"
@@ -56,7 +56,8 @@
                 </v-btn>
               </template>
               <span>Source</span>
-            </v-tooltip>
+            </v-tooltip> -->
+            <router-view></router-view>
           </v-col>
         </v-row>
       </v-container>
