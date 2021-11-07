@@ -6,6 +6,8 @@
 import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+require("plugins/dayjs")
+
 
 Rails.start()
 ActiveStorage.start()

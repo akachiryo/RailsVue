@@ -11,6 +11,7 @@ import "vuetify/dist/vuetify.min.css"; // 追加
 import router from '@/router'; //追加
 import store from '@/store' //追加
 import App from '../app.vue'
+require("plugins/dayjs")
 
 Vue.use(Vuetify); // 追加
 const vuetify = new Vuetify(); // 追加

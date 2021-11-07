@@ -16,7 +16,6 @@
     </v-container>
 </template>
 <script>
-<script>
     import MicropostForm from '@/components/MicropostForm'
     import TimelineList from '@/components/TimelineList'
     import axios from "axios";
